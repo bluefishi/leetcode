@@ -1,0 +1,70 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+    //link: http://leetcode.com/onlinejudge#question_86
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(head == null) return null;
+        
+        ListNode cur = head;
+        ListNode large_head = null;
+        ListNode small_head = null;
+        ListNode large = null;
+        ListNode small = null;
+        
+        if(head.val < x) {small = head; small_head = small;}
+        else {large = head; large_head = large;}
+        if(small == null)
+        {
+            while(cur != null && cur.val >= x)
+                cur = cur.next;
+            if(cur != null)   { small = cur;small_head = small;}
+        }
+        else if(large == null)
+        {
+            while(cur != null && cur.val < x)
+                cur = cur.next;
+            if(cur != null)
+            {
+               large = cur;
+               large_head = large;
+             }
+        }
+        if(small == null) return large_head;
+        if(large == null) return small_head;
+        if(large != null && small != null)
+        {
+          cur = head.next;
+          while(cur != null)
+          {
+              if(cur == small || cur == large) { cur = cur.next; continue;}
+              if(cur.val < x) 
+              {
+                  small.next = cur;
+                  small = small.next;
+                  cur = cur.next;
+              }
+              else
+              {
+                  large.next = cur;
+                  large = large.next;
+                  cur = cur.next;
+              }
+          }
+          large.next = null;
+          small.next = large_head;
+          return small_head;
+        }
+        return null;
+    }
+}
