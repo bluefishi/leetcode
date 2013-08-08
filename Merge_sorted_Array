@@ -26,6 +26,5 @@ public class Solution {
             A[q]=B[q];
             q--;
         }
-                    
     }
 }
