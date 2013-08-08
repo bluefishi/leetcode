@@ -1,0 +1,34 @@
+public class Solution {
+    public int[] plusOne(int[] digits) {
+    //link: http://leetcode.com/onlinejudge#question_66
+        // Start typing your Java solution below
+        // DO NOT write main() function
+       if(digits == null) return null;
+       int id = digits.length-1;
+       int value = 0;
+       int tag = 0;
+       value = digits[id]+1;
+       tag = value / 10;
+       digits[id] = value % 10;
+       for(int i=id-1;i>=0;i--)
+       {
+       //    if(i== digits.length-1)
+        //        value = digits[id]+1;
+          // else
+           value = digits[i]+tag;
+           digits[i] = value % 10;
+           tag = value / 10;
+           if(tag == 0) return digits;
+       }
+       if(tag != 0)
+       {
+           int[] result = new int[digits.length + 1];
+           result[0]=1;
+           for(int i = 0;i<digits.length;i++)
+           result[i+1] = digits[i];
+           return result;
+       }
+           
+       return digits;
+    }
+}
