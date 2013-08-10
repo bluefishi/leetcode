@@ -1,0 +1,31 @@
+public class Solution {
+    public int removeElement(int[] A, int elem) {
+    //link: 
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(A == null ) return 0;
+        int len = A.length;
+       
+        for(int i = 0;i<len;i++)
+        {
+            if(A[i]==elem)
+            {
+                while(len-1 > i)
+                {
+                    if(A[len-1] == elem)
+                        len --;
+                    else
+                        break;
+                }
+                if(len == i && A[len]==elem) return len - 1;
+                else if(len == i &&A[len]!=elem) return len;
+                else
+                {    A[i] = A[len-1];
+                    len --;
+                }
+            }
+        }
+        return len;
+        
+    }
+}
