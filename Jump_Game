@@ -1,0 +1,21 @@
+public class Solution {
+    public boolean canJump(int[] A) {
+    //link: http://leetcode.com/onlinejudge#question_55
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(A == null) return false;
+        int len = A.length;
+      if(len == 1) return true;
+	    int id = 0;
+        while(id<len)
+        {
+            id += A[id];
+            if(id > len-1) return true;
+            if(id!=len-1 && A[id] == 0) return false;
+            if(id == len-1) return true;
+           
+        }
+        
+        return false;
+    }
+}
