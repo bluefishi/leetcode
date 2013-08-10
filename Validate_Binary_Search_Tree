@@ -1,0 +1,38 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+    //link: http://leetcode.com/onlinejudge#question_98
+        // Start typing your Java solution below
+        // DO NOT write main() function
+     if(root == null) return true;
+     if(!isValidBST(root.left) || !isValidBST(root.right))
+        return false;
+      TreeNode cur; 
+     if(root.left != null)
+     {
+        cur = root.left;
+        while(cur.right != null)
+        cur = cur.right;
+        if(cur.val >= root.val) return false;
+     }
+     if(root.right != null)
+     {
+         cur = root.right;
+         while(cur.left != null)
+            cur = cur.left;
+        if(cur.val <= root.val) return false;
+        
+     }
+     return true;
+       
+     
+    }
+}
