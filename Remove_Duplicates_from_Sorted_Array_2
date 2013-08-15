@@ -1,0 +1,44 @@
+public class Solution {
+    public int removeDuplicates(int[] A) {
+    //link: http://leetcode.com/onlinejudge#question_80
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(A==null) return 0;
+        int len = A.length;
+        if(len <=2) return len;
+       
+        int result = 1;
+        for(int i = 1;i<len;i++)
+        {
+            int count = 1;
+            while(i<len && A[i] == A[i-1])
+            {
+                count ++;
+                if(count<3)
+                {
+                    A[result] = A[i];
+                    result ++;
+                }
+                i++;   
+               
+            }
+            if(i<len)
+            {
+                A[result] = A[i];
+                result++;
+            }
+            else if(i ==len)
+            {
+                if(A[len-1] == A[len-2] && A[len-2] == A[len-3])
+                    return result;
+                else
+                {
+                    A[result-1]=A[len-1];
+                    //result++;
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
+}
