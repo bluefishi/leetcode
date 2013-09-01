@@ -1,0 +1,40 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
+        //link: http://leetcode.com/onlinejudge#question_90
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(num == null) return null;
+        return subsetsWithDup(num,0);
+    }
+    ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num, int index)
+    {
+        ArrayList<ArrayList<Integer>> allsubsets;
+        if(index == num.length)
+        {
+            allsubsets = new ArrayList<ArrayList<Integer>>();
+            allsubsets.add(new ArrayList<Integer>());
+        }
+        else
+        {
+            allsubsets = subsetsWithDup(num, index +1);
+            int item = num[index];
+            ArrayList<ArrayList<Integer>> somesubsets = new ArrayList<ArrayList<Integer>>();
+            for(ArrayList<Integer> subset : allsubsets)
+            {
+                ArrayList<Integer> newsubset = new ArrayList<Integer>();
+                newsubset.addAll(subset);
+                newsubset.add(item);
+                Collections.sort(newsubset);
+                if(!somesubsets.contains(newsubset))
+                    somesubsets.add(newsubset);
+            }
+            for(ArrayList<Integer> subset : somesubsets)
+            {
+                if(!allsubsets.contains(subset))
+                    allsubsets.add(subset);
+            }
+            
+        }
+        return allsubsets;
+    }
+}
