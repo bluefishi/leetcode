@@ -1,0 +1,35 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        //link: http://leetcode.com/onlinejudge#question_78
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(S == null) return null;
+        return subsets(S,0);
+    }
+    ArrayList<ArrayList<Integer>> subsets(int[] S, int index)
+    {
+        ArrayList<ArrayList<Integer>> allsubsets;
+        if(index == S.length)
+        {
+            allsubsets = new ArrayList<ArrayList<Integer>>();
+            allsubsets.add(new ArrayList<Integer>());
+        }
+        else
+        {
+            allsubsets = subsets(S, index+1);
+            int item = S[index];
+            ArrayList<ArrayList<Integer>> somesubsets = new ArrayList<ArrayList<Integer>>();
+            for(ArrayList<Integer> subset:allsubsets)
+            {
+                ArrayList<Integer> newsubsets =  new ArrayList<Integer>();//attention!
+                newsubsets.add(item);
+                newsubsets.addAll(subset);
+                Collections.sort(newsubsets);
+                somesubsets.add(newsubsets);
+            }
+            allsubsets.addAll(somesubsets);
+            
+        }
+        return allsubsets;
+    }
+}
