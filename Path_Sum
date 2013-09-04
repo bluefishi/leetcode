@@ -1,0 +1,40 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean hasPathSum(TreeNode root, int sum) {
+        //link: http://leetcode.com/onlinejudge#question_112
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(root == null) return false;
+        TreeNode cur ;
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.offer(root);
+        while(q.size()>0)
+        {
+            cur = q.poll();
+            if(cur.left == null && cur.right == null)
+            {
+                if(cur.val == sum)
+                  return true;
+            }
+            if(cur.left!=null)
+            {
+               cur.left.val +=cur.val;
+               q.offer(cur.left);
+            }
+            if(cur.right != null)
+            {
+              cur.right.val +=cur.val;
+              q.offer(cur.right);
+            }
+        }
+        return false;
+    }
+}
