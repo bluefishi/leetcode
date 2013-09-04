@@ -1,0 +1,46 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+    //link: http://leetcode.com/onlinejudge#question_129
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(root == null)return 0;
+        if(root.left == null && root.right == null) return root.val;
+        
+        TreeNode cur;
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.offer(root);
+        while(q.size()>0)
+        {
+            cur = q.poll();
+            if(cur.left == null && cur.right == null) 
+                numbers.add(cur.val);
+            if(cur.left != null)
+            {
+                cur.left.val +=cur.val*10;
+                q.offer(cur.left);
+            }
+            if(cur.right != null)
+            {
+                cur.right.val +=cur.val*10;
+                q.offer(cur.right);
+            }
+        }
+        
+        int sum = 0;
+        for(int number: numbers)
+        {
+            sum += number;
+        }
+        return sum;
+    }
+}
