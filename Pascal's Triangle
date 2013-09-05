@@ -1,0 +1,29 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+        // link: http://leetcode.com/onlinejudge#question_118
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        ArrayList<ArrayList<Integer>> results = new ArrayList<ArrayList<Integer>>();
+        if(numRows <=0) return results;
+        ArrayList<Integer> level=new ArrayList<Integer>();
+       
+        level = new ArrayList<Integer>();
+        level.add(1);
+        results.add(level);
+       
+        ArrayList<Integer> lastlevel;
+        for(int i = 2;i<= numRows;i++)
+        {
+            lastlevel = new ArrayList<Integer>();
+            lastlevel = level;
+            level = new ArrayList<Integer>();
+            level.add(1);
+            for(int j = 0;j<i-2;j++)
+                level.add(lastlevel.get(j)+lastlevel.get(j+1));
+            level.add(1);
+            results.add(level);
+        }
+        
+        return results;
+    }
+}
