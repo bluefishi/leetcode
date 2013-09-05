@@ -1,0 +1,39 @@
+public class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        //link: http://leetcode.com/onlinejudge#question_97
+        
+        if(s3==null && s2==null && s1== null)
+        return true;
+        if(s3 == null) return false;
+        if(s1 == null || s1.length() == 0)
+        {
+            if(s2.equals(s3)) return true;
+            else return false;
+        }
+        if(s2 == null || s2.length() == 0)
+        {
+             if(s1.equals(s3))return true;
+             else return false;
+        }
+        int l3 = s3.length();
+        int l1 = s1.length();
+        int l2 = s2.length();
+        if(l1+l2 != l3) return false;
+        if ( l3 == 0 && l2 == 0 && l1== 0) return true;
+        if(s3.charAt(l3-1) != s2.charAt(l2-1) && s3.charAt(l3-1) != s1.charAt(l1-1))
+            return false;
+        if(s3.charAt(l3-1) == s2.charAt(l2-1))
+        {
+            if(isInterleave(s1,s2.substring(0,l2-1),s3.substring(0,l3-1)))
+                return true;
+        }
+        if(s3.charAt(l3-1) == s1.charAt(l1-1))
+        {
+            if(isInterleave(s1.substring(0,l1-1),s2,s3.substring(0,l3-1)))
+                return true;
+        }
+        return false;
+    }
+}
