@@ -1,0 +1,18 @@
+public class Solution {
+    public ArrayList<Integer> getRow(int rowIndex) {
+        // link: http://leetcode.com/onlinejudge#question_119
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        if(rowIndex < 0) return result;
+        result.add(1);
+        if(rowIndex == 0) return result;
+        long last;
+        for(int i =0;i<rowIndex;i++)
+        {
+            last = result.get(i) ;
+            result.add(Integer.parseInt((last * (rowIndex-i)/(i+1))+"")); 
+        }
+        return result;
+    }
+}
