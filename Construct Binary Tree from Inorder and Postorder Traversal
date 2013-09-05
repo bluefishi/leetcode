@@ -1,0 +1,63 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        // http://leetcode.com/onlinejudge#question_106
+        if(inorder == null || postorder == null) return null;
+        if(inorder.length ==0 || postorder.length ==0) return null;
+        if(inorder.length != postorder.length ) return null;
+        
+        TreeNode root = new TreeNode(0);
+        int rootvalue = postorder[postorder.length-1];
+        root.val = rootvalue;
+        
+        int leftlen =0;
+        int rightlen = 0;
+        for(int i=0;i<inorder.length;i++)
+        {
+            if(inorder[i] == rootvalue)
+            {
+                 leftlen = i;
+                 rightlen = inorder.length - i-1;
+                 break;
+            }
+        }
+       
+        if(leftlen + rightlen != inorder.length-1) return null;
+        
+        int[] linorder = new int[leftlen];
+        int[] lpostorder  = new int[leftlen];
+        
+        int[] rinorder = new int[rightlen];
+        int[] rpostorder = new int[rightlen];
+        int k = 0;
+        for(int i = 0;i<inorder.length-1;i++)
+        {
+            if(i<leftlen)
+            {
+                linorder[i]=inorder[i];
+                lpostorder[i] = postorder[i];
+            }
+            else
+            {
+                rinorder[k] = inorder[i+1];
+                rpostorder[k] = postorder[i];
+                k++;
+            }
+        }
+        
+        root.left = buildTree(linorder,lpostorder);
+        root.right = buildTree(rinorder,rpostorder);
+        return root;
+    }
+    
+}
