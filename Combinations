@@ -1,0 +1,47 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combine(int n, int k) {
+    //link: http://leetcode.com/onlinejudge#question_77
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        ArrayList<ArrayList<Integer>> results = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        
+        if(n<k) return results;
+        if(n == k) 
+        {
+            for(int i = 1;i<=n;i++)
+                result.add(i);
+            results.add(result);
+            
+        }
+        else
+        {
+            if(k == 1)
+            {
+               for(int i = 1;i<=n;i++)
+              { 
+                 result = new ArrayList<Integer>();
+                 result.add(i);
+                 results.add(result); 
+              }
+              return results;
+            }
+            else
+            {
+              
+                for(ArrayList<Integer> temp: combine(n-1,k-1))
+                {
+                    result = new ArrayList<Integer>();
+                    result.addAll(temp);
+                    result.add(n);
+                    results.add(result);
+                }
+                for(ArrayList<Integer> temp: combine(n-1,k))
+                    results.add(temp);
+                
+            }
+           
+        }
+        return results;
+    }
+}
