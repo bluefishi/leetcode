@@ -1,0 +1,35 @@
+public class Solution {
+    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
+        // link: http://leetcode.com/onlinejudge#question_120
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(triangle == null) return 0;
+        int n ;
+        n = triangle.get(triangle.size()-1).size();
+        if (n == 1) return triangle.get(triangle.size()-1).get(0);
+        else
+            n +=1;
+            
+        int[] level = new int[n];
+        int cur;
+        for(int i = 0;i<n;i++)
+            level[i] = 0x7fffffff;
+        level[1] = triangle.get(0).get(0);
+        for(int i = 2;i < n;i++)
+        {
+            for(int j = i;j>0;j--)
+            {
+                cur = triangle.get(i-1).get(j-1);
+                level[j] = Math.min(level[j],level[j-1])+cur;
+            }
+        }
+        
+        int min=level[0];
+        for(int i:level)
+        {
+            if(i < min)
+                min = i;
+        }
+        return min;
+    }
+}
