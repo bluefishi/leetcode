@@ -1,0 +1,42 @@
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+    //http://oj.leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(root == null) return;
+        root.next = null;
+        TreeLinkNode p = root;
+        TreeLinkNode thisLineHead = p;
+        while(p!= null)
+        {
+           
+            if(p.left !=null)
+            {
+                if(p.right != null)p.left.next = p.right;
+                else p.left.next = child(p.next);
+            }
+            if(p.right != null) p.right.next = child(p.next);
+            if(p.next !=null) p = p.next;
+            else {
+                p = child(thisLineHead);
+                thisLineHead = p;
+            }
+            
+        }
+       
+    }
+    TreeLinkNode child(TreeLinkNode node)
+    {
+        if(node == null) return null;
+        if(node.left !=null) return node.left;
+        if(node.right !=null) return node.right;
+        return child(node.next);
+    }
+}
