@@ -59,3 +59,44 @@ public class Solution {
         
     }
 }
+
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(inorder ==null || preorder == null || preorder.length != inorder.length)
+            return null;
+        int length = inorder.length;
+        if(length == 0) return null;
+        return buildTree(preorder,0,inorder,0,length);
+    }
+    TreeNode buildTree(int[] preorder,int pbegin,int[] inorder,int ibegin,int length)
+    {
+        if(length == 0 || ibegin >=inorder.length || pbegin >=preorder.length)
+            return null;
+        TreeNode root = new TreeNode(0);
+        root.val = preorder[pbegin];
+        int left_size = 0;
+        for(int i = ibegin ;i<ibegin + length;i++)
+        {
+            if(inorder[i]==root.val)
+            {
+                left_size = i-ibegin;
+                break;
+            }
+        }
+        root.left = buildTree(preorder,pbegin+1,inorder,ibegin,left_size);
+        root.right = buildTree(preorder,pbegin+left_size+1,inorder,ibegin+left_size+1,length-left_size-1);
+        return root;
+    }
+}
