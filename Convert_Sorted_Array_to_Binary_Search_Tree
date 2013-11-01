@@ -44,3 +44,32 @@ public class Solution {
         return node;
     }
 }
+
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode sortedArrayToBST(int[] num) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(num == null) return null;
+        return sortedArrayToBST(num,0,num.length-1);
+    }
+    TreeNode sortedArrayToBST(int[] num, int begin, int end)
+    {
+        if(begin > end) return null;
+        int mid = begin +(end -begin)/2;
+        TreeNode root = new TreeNode(0);
+        root.val = num[mid];
+        root.left = sortedArrayToBST(num,begin,mid-1);
+        root.right = sortedArrayToBST(num,mid+1,end);
+        return root;
+    }
+}
