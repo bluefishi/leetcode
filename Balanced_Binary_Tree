@@ -34,3 +34,29 @@ public class Solution {
         return height;
     }
 }
+
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(root == null) return true;
+        if(Math.abs(height(root.left)-height(root.right))>1) return false;
+        return isBalanced(root.left)&& isBalanced(root.right);
+    }
+    int height(TreeNode node)
+    {
+        if(node == null) return 0;
+        return (Math.max(height(node.left),height(node.right))+1);
+    }
+    
+}
