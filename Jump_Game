@@ -19,3 +19,22 @@ public class Solution {
         return false;
     }
 }
+
+
+
+public class Solution {
+    public boolean canJump(int[] A) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(A==null) return false;
+        int cur =0;
+        while(cur<A.length)
+        {
+            if(cur == A.length -1) return true;
+            if(A[cur] == 0) break;
+            cur+=A[cur];
+        }
+        if(cur>=A.length) return true;
+        return false;
+    }
+}
