@@ -32,3 +32,22 @@ public:
         return result;
     }
 };
+
+
+public class Solution {
+    public boolean isPalindrome(int x) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(x<0) return false;
+        String s = x+"";
+        char[] c = s.toCharArray();
+        int start = 0;
+        int end = c.length-1;
+        while(start <= end)
+        {
+            if(c[start++] != c[end--])
+                return false;
+        }
+        return true;
+    }
+}
