@@ -32,3 +32,24 @@ public class Solution {
         return result;
     }
 }
+
+
+public class Solution {
+    public int removeDuplicates(int[] A) {
+        // IMPORTANT: Please reset any member data you declared, as
+        // the same Solution instance will be reused for each test case.
+        if(A == null || A.length ==0) return 0;
+        if(A.length ==1) return 1;
+        int len = 1;
+        int cur = 1;
+        while(cur<A.length)
+        {
+            if(A[cur-1]!=A[cur])
+            {
+                A[len++]=A[cur];
+            }
+            ++cur;
+        }
+        return len;
+    }
+}
