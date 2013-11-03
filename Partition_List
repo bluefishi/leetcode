@@ -68,3 +68,64 @@ public class Solution {
         return null;
     }
 }
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        if(head == null || head.next == null) return head;
+        ListNode sHead = null;
+        ListNode lHead = null;
+        ListNode cur = head;
+        ListNode scur = null;
+        ListNode lcur = null;
+        while(cur != null)
+        {
+            if(cur.val <x)
+            {
+                if(sHead == null)
+                {
+                    sHead = cur;
+                    scur = sHead;
+                }
+                else
+                {
+                   scur.next = cur;
+                    scur = scur.next; 
+                }
+                
+            }
+            else
+            {
+                if(lHead == null)
+                {
+                    lHead = cur;
+                    lcur = lHead;
+                }
+                else
+                {
+                    lcur.next = cur;
+                    lcur = lcur.next;
+                }
+                
+            }
+            cur = cur.next;
+        }
+        if(sHead == null) return head;
+        scur.next = lHead;
+        if(lcur!=null) lcur.next = null;
+        return sHead;
+    }
+}
